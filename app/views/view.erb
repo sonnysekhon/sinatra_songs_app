@@ -3,5 +3,12 @@
     <h3><%= song.title %> <small>(Artist: <%= song.artist %>)</small></h3>
     <p>Created At: <%= song.created_at %></p>
   </div>
+  <% if session[:user_id] %>
+    <form method="post" action="/upvote">
+      <input type="submit" value="Upvote">
+    </form>
+  <% end %>
 <% end %>
-<a href="/create">Create a song!</a>
+<p></p>
+<p>
+<a href="/create">Create a song!</a></p>
