@@ -2,9 +2,11 @@
   <div class="song">
     <h3><%= song.title %> <small>(Artist: <%= song.artist %>)</small></h3>
     <p>Created At: <%= song.created_at %></p>
+    <p>Upvotes: <%=  %></p>
   </div>
   <% if session[:user_id] %>
     <form method="post" action="/upvote">
+      <input type="hidden" name="song_id" value="<%= song.id %>">
       <input type="submit" value="Upvote">
     </form>
   <% end %>

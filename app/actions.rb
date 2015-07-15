@@ -11,6 +11,10 @@ end
 
 get '/view' do
   @songs = Song.all
+  #@songs = Song.joins('LEFT OUTER JOIN  upvotes ON upvotes.song_id = songs.id').group('songs.id').select('songs.*, COUNT(upvotes.song_id) as votes')
+#song.votes
+  # @songs = Song.joins('LEFT OUTER JOIN upvotes ON upvotes.song_id = songs.id GROUP BY songs.id')
+  #binding.pry
   erb :view
 end
 
@@ -70,6 +74,19 @@ get '/upvote' do
 end
 
 post '/upvote' do
+  #binding.pry
+  if session[:user_id]
+    Upvote.create(
+      user_id: session[:user_id],
+      song_id: params[:song_id]
+    )
+  end
+
+  redirect to('/view')
+end
+
+def count_upvotes
+
 end
 
 # get '/songs' do
